@@ -38,14 +38,7 @@
 </head>
 <body>
  
-   <a href="http://localhost:8080/PAF_Project/Hospital_Insert.jsp">
-    <button>Hospital</button>
-</a>
-<br>
- <a href="http://localhost:8080/PAF_Project/Doctor_Insert.jsp">
-    <button>Doctor</button>
-</a>
-
+ 
 <form id="loginform" name="loginform" method="post" action="index.jsp">
 		UserName: 
 		<input id="userName" name="userName" type="text" class="form-control form-control-sm"> <br>
