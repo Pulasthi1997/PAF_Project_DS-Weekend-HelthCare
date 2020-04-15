@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\Users\NATASHA\eclipse-workspace\Appointment\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3131678803.index
-4158892328.index
-4262484074.index
-1554803792.index
-2195181022.index
-916686010.index
