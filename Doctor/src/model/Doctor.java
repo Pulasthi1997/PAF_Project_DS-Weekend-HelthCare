@@ -6,11 +6,12 @@ import database.dbconnect;
 
 public class Doctor { // A common method to connect to the DB
 
-	dbconnect obj=new dbconnect();
+	dbconnect obj = new dbconnect();
 
-	public String insertDoctors(String dname, String dtype, String contact, String address, String email, String hospitalID) {
+	public String insertDoctors(String dname, String dtype, String contact, String address, String email,
+			String hospitalID) {
 		String output = "";
-		
+
 		try {
 			Connection con = obj.connect();
 			if (con == null) {
@@ -19,17 +20,16 @@ public class Doctor { // A common method to connect to the DB
 // create a prepared statement
 			String query = " insert into hospital_docters (`D_Name`,`D_Type`,`D_Contact_Number`,`D_Address`,`D_Email`,`Hospital_ID`)"
 					+ " values ( ?, ?, ?,?,?,?)";
-	
+
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 // binding values
-			
+
 			preparedStmt.setString(1, dname);
 			preparedStmt.setString(2, dtype);
-            preparedStmt.setInt(3, Integer.parseInt(contact));
+			preparedStmt.setInt(3, Integer.parseInt(contact));
 			preparedStmt.setString(4, address);
 			preparedStmt.setString(5, email);
 			preparedStmt.setString(6, hospitalID);
-			
 
 //execute the statement
 
@@ -67,8 +67,9 @@ public class Doctor { // A common method to connect to the DB
 				String D_Email = rs.getString("D_Email");
 				String Hospital_ID = rs.getString("Hospital_ID");
 
-				//Add into the html table
-				output += "<tr><td><input id=\"hidDoctorIDUpdate\"name=\"hidDoctorIDUpdate\"type=\"hidden\" value=\"" + Doctor_ID + "\">" + D_Name + "</td>";    
+				// Add into the html table
+				output += "<tr><td><input id=\"hidDoctorIDUpdate\"name=\"hidDoctorIDUpdate\"type=\"hidden\" value=\""
+						+ Doctor_ID + "\">" + D_Name + "</td>";
 				output += "<td>" + D_Type + "</td>";
 				output += "<td>" + D_Contact_Number + "</td>";
 				output += "<td>" + D_Address + "</td>";
@@ -78,7 +79,8 @@ public class Doctor { // A common method to connect to the DB
 				output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
 						+ "<td><form method=\"post\" action=\"Doctor_Insert.jsp\">"
 						+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-						+ "<input name=\"hidDoctorIDDelete\" type=\"hidden\" value=\"" + Doctor_ID + "\">" + "</form></td></tr>";
+						+ "<input name=\"hidDoctorIDDelete\" type=\"hidden\" value=\"" + Doctor_ID + "\">"
+						+ "</form></td></tr>";
 			}
 			con.close();
 //Complete the html table
@@ -90,7 +92,8 @@ public class Doctor { // A common method to connect to the DB
 		return output;
 	}
 
-	public String updateDoctors(String ID, String dname, String dtype, String contact, String address, String email, String hospitalID) {
+	public String updateDoctors(String ID, String dname, String dtype, String contact, String address, String email,
+			String hospitalID) {
 		String output = "";
 		try {
 			Connection con = obj.connect();
@@ -103,9 +106,9 @@ public class Doctor { // A common method to connect to the DB
 // binding values
 			preparedStmt.setString(1, dname);
 			preparedStmt.setString(2, dtype);
-            preparedStmt.setInt(3, Integer.parseInt(contact));
+			preparedStmt.setInt(3, Integer.parseInt(contact));
 			preparedStmt.setString(4, address);
-            preparedStmt.setString(5, email);
+			preparedStmt.setString(5, email);
 			preparedStmt.setString(6, hospitalID);
 			preparedStmt.setInt(7, Integer.parseInt(ID));
 			// execute the statement
@@ -119,11 +122,10 @@ public class Doctor { // A common method to connect to the DB
 		return output;
 	}
 
-	
 	public String deleteDoctor(String Doctor_ID) {
 		String output = "";
 		try {
-			Connection con =obj.connect();
+			Connection con = obj.connect();
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
