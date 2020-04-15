@@ -23,7 +23,7 @@
 			
 			}else{
 				response.sendRedirect("index.jsp");
-				System.out.println("Login failed..............");
+				System.out.println("Login failed................");
 			}
 			
 		}
