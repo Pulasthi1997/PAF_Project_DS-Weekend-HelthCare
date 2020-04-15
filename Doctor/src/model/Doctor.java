@@ -33,8 +33,6 @@ public class Doctor { // A common method to connect to the DB
 			
 
 //execute the statement
-//execute the statement	
-//execute the statement	
 
 			preparedStmt.execute();
 			con.close();
@@ -106,11 +104,9 @@ public class Doctor { // A common method to connect to the DB
 // binding values
 			preparedStmt.setString(1, dname);
 			preparedStmt.setString(2, dtype);
-//preparedStmt.setDouble(3, Double.parseDouble(price));
-			preparedStmt.setInt(3, Integer.parseInt(contact));
+            preparedStmt.setInt(3, Integer.parseInt(contact));
 			preparedStmt.setString(4, address);
-//preparedStmt.setInt(5, Integer.parseInt(ID));
-			preparedStmt.setString(5, email);
+            preparedStmt.setString(5, email);
 			preparedStmt.setString(6, hospitalID);
 			preparedStmt.setInt(7, Integer.parseInt(ID));
 			// execute the statement
