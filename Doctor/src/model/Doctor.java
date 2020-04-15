@@ -25,8 +25,7 @@ public class Doctor { // A common method to connect to the DB
 			
 			preparedStmt.setString(1, dname);
 			preparedStmt.setString(2, dtype);
-//preparedStmt.setDouble(4, Double.parseDouble(price));
-			preparedStmt.setInt(3, Integer.parseInt(contact));
+            preparedStmt.setInt(3, Integer.parseInt(contact));
 			preparedStmt.setString(4, address);
 			preparedStmt.setString(5, email);
 			preparedStmt.setString(6, hospitalID);
