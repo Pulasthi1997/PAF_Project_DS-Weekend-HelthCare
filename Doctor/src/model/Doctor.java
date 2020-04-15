@@ -37,7 +37,7 @@ public class Doctor { // A common method to connect to the DB
 			con.close();
 			output = "Inserted successfully created ";
 		} catch (Exception e) {
-			output = "Error while inserting the item.";
+			output = "Error while inserting the doctor.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -86,7 +86,7 @@ public class Doctor { // A common method to connect to the DB
 //Complete the html table
 			output += "</table>";
 		} catch (Exception e) {
-			output = "Error while reading the items......";
+			output = "Error while reading the doctors......";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -116,7 +116,7 @@ public class Doctor { // A common method to connect to the DB
 			con.close();
 			output = "Updated successfully done";
 		} catch (Exception e) {
-			output = "Error while updating the item.";
+			output = "Error while updating the doctor.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -139,7 +139,7 @@ public class Doctor { // A common method to connect to the DB
 			con.close();
 			output = "Deleted successfully";
 		} catch (Exception e) {
-			output = "Error while deleting the item.";
+			output = "Error while deleting the doctor.";
 			System.err.println(e.getMessage());
 		}
 		return output;
