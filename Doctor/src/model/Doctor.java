@@ -14,7 +14,7 @@ public class Doctor { // A common method to connect to the DB
 		try {
 			Connection con = obj.connect();
 			if (con == null) {
-				return "Error while connecting to the database for inserting..";
+				return "Error while connecting to the database for inserting....";
 			}
 // create a prepared statement
 			String query = " insert into hospital_docters (`D_Name`,`D_Type`,`D_Contact_Number`,`D_Address`,`D_Email`,`Hospital_ID`)"
