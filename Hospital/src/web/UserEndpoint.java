@@ -24,6 +24,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import model.LoginSelect;
 
 
 @Path("/users")
@@ -44,6 +45,9 @@ public class UserEndpoint {
         try {
             // Authenticate the user using the credentials provided
             //authenticate(Username, Password);
+        	LoginSelect loginSelect = new LoginSelect();			
+			if(loginSelect.loginVal(Username, Password) == 1){
+	        }
             // Issue a token for the user
             String token = issueToken(Username);
             // Return the token on the response
