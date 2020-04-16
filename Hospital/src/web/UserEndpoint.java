@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import javax.crypto.KeyGenerator;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -28,6 +29,7 @@ import model.LoginSelect;
 
 
 @Path("/users")
+@RequestScoped
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 public class UserEndpoint {
