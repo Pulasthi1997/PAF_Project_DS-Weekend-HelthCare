@@ -17,9 +17,9 @@
 			System.out.println("Log in attributes : "+s1+" "+s2);
 			
 			if(loginSelect.loginVal(s1, s2) == 1){
-				response.sendRedirect("http://localhost:8085/Hospital/Hospital_Config.jsp");
+				response.sendRedirect("http://localhost:8088/Hospital/Hospital_Config.jsp");
 			}else if(loginSelect.loginVal(s1, s2) == 2){
-				response.sendRedirect("http://localhost:8080/Doctor/Doctor_Insert.jsp");
+				response.sendRedirect("http://localhost:9090/Doctor/Doctor_Insert.jsp");
 			
 			}else{
 				response.sendRedirect("index.jsp");
