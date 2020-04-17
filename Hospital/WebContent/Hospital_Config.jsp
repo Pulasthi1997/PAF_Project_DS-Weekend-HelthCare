@@ -47,7 +47,7 @@
   <script type="text/javascript" src="./Components/Hospital.js"></script>
 </head>
 <body>
-	<form id="formHospital" name="formHospital" method="post" action="Hospital_Insert.jsp">
+	<form id="formHospital" name="formHospital" method="post" action="Hospital_Config.jsp">
 		Hospital Name: 
 		<input id="H_name" name="H_name" type="text"
 			class="form-control form-control-sm" required> <br>
