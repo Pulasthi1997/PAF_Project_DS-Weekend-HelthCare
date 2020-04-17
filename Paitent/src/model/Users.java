@@ -1,38 +1,48 @@
 package model;
 
 import java.sql.Statement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Util.DBConnect;
+
 public class Users {
 
-	private Connection connect() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+//	private Connection connect() {
+//		Connection con = null;
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//			// Provide the correct details: DBServer/DBName, username, password
+//			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf_project?useTimezone=true&serverTimezone=UTC","root", "");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return con;
+//	}
 
-			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf_project?useTimezone=true&serverTimezone=UTC","root", "");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-
-
+	DBConnect obj  = new DBConnect();
+	
 public String addUserDetails(String User_Name,String U_NIC, String U_Age , String U_Contact_Number, String U_Email, String U_Address) {
+	
 	String output = "";
+	
 	try {
-		Connection con = connect();
+		
+		Connection con = obj.connect();
 		if (con == null) {
 			return "Error while connecting to the database for inserting.";
 		}
+		
 		// create a prepared statement
 		String query = " insert into user(`User_ID`,`User_Name`,`U_NIC`,`U_Age`,`U_Contact_Number`,`U_Email`,`U_Address`)"
 				+ " values (?, ?, ?, ?, ?, ?, ?)";
+		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
+		
 		// binding values
 		preparedStmt.setInt(1, 0);
 		preparedStmt.setString(2,User_Name);
@@ -46,7 +56,9 @@ public String addUserDetails(String User_Name,String U_NIC, String U_Age , Strin
 		preparedStmt.execute();
 		con.close();
 		output = "Inserted successfully";
+		
 	} catch (Exception e) {
+		
 		output = "Error while inserting the user.";
 		System.err.println(e.getMessage());
 	}
@@ -54,16 +66,20 @@ public String addUserDetails(String User_Name,String U_NIC, String U_Age , Strin
 }
 
 public String readUsers() {
+	
 	String output = "";
 	try {
-		Connection con = connect();
+		Connection con = obj.connect();
 		if (con == null) {
 			return "Error while connecting to the database for reading.";
 		}
+		
 		// Prepare the html table to be displayed
+		
 		output = "<table border=\"1\"><tr><th>User ID</th><th>User Name</th><th>NIC</th><th>Age</th><th>Contact Number</th><th>Email</th><th>Address</th><th>Update</th><th>Remove</th></tr>";
 		String query = "select * from user";
 		Statement stmt = (Statement) con.createStatement();
+		
 		ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
 		
 		// iterate through the rows in the result set
@@ -106,7 +122,7 @@ public String readUsers() {
 public String updateUserDetails(String User_ID, String User_Name,String U_NIC, String  U_Age , String U_Contact_Number, String U_Email, String U_Address) {
 	String output = "";
 	try {
-		Connection con = connect();
+		Connection con = obj.connect();
 		if (con == null) {
 			return "Error while connecting to the database for updating.";
 		}
@@ -137,7 +153,7 @@ public String updateUserDetails(String User_ID, String User_Name,String U_NIC, S
 public String deleteUsers(String User_ID) {
 	String output = "";
 	try {
-		Connection con = connect();
+		Connection con = obj.connect();
 		if (con == null) {
 			return "Error while connecting to the database for deleting.";
 		}
