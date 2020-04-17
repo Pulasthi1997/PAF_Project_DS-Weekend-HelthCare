@@ -33,7 +33,6 @@ public class LoginSelect {
 					}
 				}
 				
-//			abcde
 							
 		} catch (Exception e) {
 				System.out.println("Error while logging........."+ e);
