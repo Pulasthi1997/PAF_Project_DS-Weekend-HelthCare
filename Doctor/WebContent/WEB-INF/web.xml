@@ -9,7 +9,6 @@
 <servlet-mapping>
  <servlet-name>Jersey Web Application</servlet-name>
  <url-pattern>/DoctorService/*</url-pattern>
- <url-pattern>/HospitalService/*</url-pattern>
 </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

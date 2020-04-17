@@ -8,33 +8,21 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
+import util.dbconnect;
 
 import org.apache.tomcat.jni.Time;
 
+import util.dbconnect;
+
 public class Appointment {
 
-	// A common method to connect to the DB
-	private static Connection connect() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
+	dbconnect obj = new dbconnect();
 
-			// Provide the correct details: DBServer/DBName, username, password
-
-			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/paf_project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-					"root", "");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-
-	// Inserting Appointment
-	public String insertAppoinment(String date, String time,int patId, int doctorID, int payId) {
+	// Inserting Appointments
+	public String insertAppoinment(String date, String time, int patId, int doctorID, int payId) {
 		String output = "";
 		try {
-			Connection con = connect();
+			Connection con = obj.connect();
 			if (con == null) {
 				return "Error while connecting to the database for inserting.";
 			}
@@ -58,13 +46,12 @@ public class Appointment {
 		return output;
 	}
 
-	
-	// Get All Appointment details
+	// View Appointment details
 	public String GetAllAppoinments() {
 		String output = "";
 
 		try {
-			Connection con = connect();
+			Connection con = obj.connect();
 			if (con == null) {
 				return "Error while connecting to the database for GetAll Appointments.";
 			}
@@ -75,9 +62,7 @@ public class Appointment {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
-			// PreparedStatement preparedStmt = con.prepareStatement(query);
-
-			// preparedStmt.execute();
+		
 
 			while (rs.next()) {
 				String AppID = Integer.toString(rs.getInt("appointmentID"));
@@ -102,70 +87,64 @@ public class Appointment {
 			return output;
 		} catch (Exception e) {
 			output = "Error while GetAll Appointments.";
-			// return output;
+	
 			System.err.println(e.getMessage());
 		}
 		return output;
 	}
+
 	// Get Appointment details
-		public String GetAppoinments(String appointmentID) {
-			String output = "";
+	public String GetAppoinments(String appointmentID) {
+		String output = "";
 
-			try {
-				Connection con = connect();
-				if (con == null) {
-					return "Error while connecting to the database for Get Appointments.";
-				}
-
-				output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Date</th><th>Time</th>"
-						+ "<th>patientID</th><th>doctorID</th><th>paymentID </th><th>Status</th></tr>";
-				String query = "SELECT * from appointment where `appointmentID`=?";
-				
-				PreparedStatement preparedStmt = con.prepareStatement(query);
-				preparedStmt.setInt(1, Integer.parseInt(appointmentID)); 
-				ResultSet rs = preparedStmt.executeQuery(query);
-				
-
-				// PreparedStatement preparedStmt = con.prepareStatement(query);
-
-				// preparedStmt.execute();
-
-				if (rs.next()) {
-					String AppID = Integer.toString(rs.getInt("appointmentID"));
-					String date = rs.getString("date");
-					String time = rs.getString("time");
-					String patientID = rs.getString("patientID");
-					String doctorID = rs.getString("doctorID");
-					String paymentID = Integer.toString(rs.getInt("paymentID"));
-					String Status = rs.getString("appointmentStatus");
-
-					output += "<tr><td>" + AppID + "</td>";
-					output += "<td>" + date + "</td>";
-					output += "<td>" + time + "</td>";
-					output += "<td>" + patientID + "</td>";
-					output += "<td>" + doctorID + "</td>";
-					output += "<td>" + paymentID + "</td>";
-					output += "<td>" + Status + "</td>";
-				}
-
-				con.close();
-				output += "</table>";
-				return output;
-			} catch (Exception e) {
-				output = "Error while GetAll Appointments.";
-				// return output;
-				System.err.println(e.getMessage());
+		try {
+			Connection con = obj.connect();
+			if (con == null) {
+				return "Error while connecting to the database for Get Appointments.";
 			}
-			return output;
-		}
 
-	
-	
+			output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Date</th><th>Time</th>"
+					+ "<th>patientID</th><th>doctorID</th><th>paymentID </th><th>Status</th></tr>";
+			String query = "SELECT * from appointment where `appointmentID`=?";
+
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setInt(1, Integer.parseInt(appointmentID));
+			ResultSet rs = preparedStmt.executeQuery(query);
+
+			if (rs.next()) {
+				String AppID = Integer.toString(rs.getInt("appointmentID"));
+				String date = rs.getString("date");
+				String time = rs.getString("time");
+				String patientID = rs.getString("patientID");
+				String doctorID = rs.getString("doctorID");
+				String paymentID = Integer.toString(rs.getInt("paymentID"));
+				String Status = rs.getString("appointmentStatus");
+
+				output += "<tr><td>" + AppID + "</td>";
+				output += "<td>" + date + "</td>";
+				output += "<td>" + time + "</td>";
+				output += "<td>" + patientID + "</td>";
+				output += "<td>" + doctorID + "</td>";
+				output += "<td>" + paymentID + "</td>";
+				output += "<td>" + Status + "</td>";
+			}
+
+			con.close();
+			output += "</table>";
+			return output;
+		} catch (Exception e) {
+			output = "Error while GetAll Appointments.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+
 	// update Appointment
-	public String updateAppoinment(String appointmentID, String date, String time,String patientID, String doctorID, String paymentID, String appointmentStatus) {
+	public String updateAppoinment(String appointmentID, String date, String time, String patientID, String doctorID,
+			String paymentID, String appointmentStatus) {
 		String output = "";
 		try {
-			Connection con = connect();
+			Connection con = obj.connect();
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
@@ -178,7 +157,7 @@ public class Appointment {
 			preparedStmt.setInt(3, Integer.parseInt(patientID));
 			preparedStmt.setInt(4, Integer.parseInt(doctorID));
 			preparedStmt.setInt(5, Integer.parseInt(paymentID));
-			preparedStmt.setString(6,appointmentStatus);
+			preparedStmt.setString(6, appointmentStatus);
 			preparedStmt.setInt(7, Integer.parseInt(appointmentID));
 			preparedStmt.execute();
 			con.close();
@@ -194,13 +173,13 @@ public class Appointment {
 	public String DeleteAppoinment(String appointmentID) {
 		String output = "";
 		try {
-			Connection con = connect();
+			Connection con = obj.connect();
 			if (con == null) {
 				return "Error while connecting to the database for Deleting.";
 			}
 			String query = "delete from appointment where appointmentID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, Integer.parseInt(appointmentID)); 
+			preparedStmt.setInt(1, Integer.parseInt(appointmentID));
 			preparedStmt.execute();
 			con.close();
 			output = "Deleted successfully";
