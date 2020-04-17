@@ -29,7 +29,7 @@ public class Login {
 					if(rs.getString("Type").equals("1")) {
 						return 1;
 					}else if(rs.getString("Type").equals("2")) {
-						return 2;
+					return 2;
 					}
 				}
 							
