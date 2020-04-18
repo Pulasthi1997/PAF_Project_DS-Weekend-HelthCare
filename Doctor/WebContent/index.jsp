@@ -19,7 +19,7 @@
 			if(loginSelect.loginVal(s1, s2) == 1){
 				response.sendRedirect("http://localhost:8088/Hospital/Hospital_Config.jsp");
 			}else if(loginSelect.loginVal(s1, s2) == 2){
-				response.sendRedirect("http://localhost:9090/Doctor/Doctor_Insert.jsp");
+				response.sendRedirect("http://localhost:8090/Doctor/Doctor_Insert.jsp");
 			
 			}else{
 				response.sendRedirect("index.jsp");
