@@ -18,7 +18,7 @@ public class Doctor { // A common method to connect to the DB
 				return "Error while connecting to the database for inserting....";
 			}
 // create a prepared statement
-			String query = " insert into hospital_docters (`D_Name`,`D_Type`,`D_Contact_Number`,`D_Address`,`D_Email`,`Hospital_ID`)"
+			String query = " insert into doctor (`D_Name`,`D_Type`,`D_Contact_Number`,`D_Address`,`D_Email`,`Hospital_ID`)"
 					+ " values ( ?, ?, ?,?,?,?)";
 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -53,7 +53,7 @@ public class Doctor { // A common method to connect to the DB
 // Prepare the html table to be displayed
 			output = "<table border=\"1\"><tr><th>Doctor Name</th><th>Doctor specification</th><th>"
 					+ "Contact Number</th><th>Doctor Address</th><th>Doctor Email </th><th>Doctor hospitalID</th><th>Update</th><th>Remove</th></tr>";
-			String query = "select * from hospital_docters";
+			String query = "select * from doctor";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 // iterate through the rows in the result set
@@ -101,7 +101,7 @@ public class Doctor { // A common method to connect to the DB
 				return "Error while connecting to the database for updating....";
 			}
 // create a prepared statement
-			String query = "UPDATE hospital_docters SET D_Name=?,D_Type=?,D_Contact_Number=?,D_Address=?,D_Email=?,Hospital_ID=? WHERE Doctor_ID=?";
+			String query = "UPDATE doctor SET D_Name=?,D_Type=?,D_Contact_Number=?,D_Address=?,D_Email=?,Hospital_ID=? WHERE Doctor_ID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 // binding values
 			preparedStmt.setString(1, dname);
@@ -130,7 +130,7 @@ public class Doctor { // A common method to connect to the DB
 				return "Error while connecting to the database for deleting.";
 			}
 // create a prepared statement
-			String query = "delete from hospital_docters where Doctor_ID=?";
+			String query = "delete from doctor where Doctor_ID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 // binding values
 			preparedStmt.setInt(1, Integer.parseInt(Doctor_ID));

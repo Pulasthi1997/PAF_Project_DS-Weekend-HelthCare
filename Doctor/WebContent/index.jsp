@@ -15,7 +15,7 @@
 			String s1 = request.getParameter("userName");
 			String s2 = request.getParameter("password");
 			System.out.println("Log in attributes : "+s1+" "+s2);
-			
+		
 			if(loginSelect.loginVal(s1, s2) == 1){
 				response.sendRedirect("http://localhost:8088/Hospital/Hospital_Config.jsp");
 			}else if(loginSelect.loginVal(s1, s2) == 2){
@@ -31,7 +31,7 @@
     
 %>	
     
-    
+                                                   
 <!DOCTYPE html>
 <html>
 <head>
