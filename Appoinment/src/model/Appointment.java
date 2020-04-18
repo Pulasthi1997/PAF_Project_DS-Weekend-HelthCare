@@ -46,7 +46,56 @@ public class Appointment {
 		return output;
 	}
 
-	// View Appointment details
+	// View Appointment details by passing the appointment ID
+	public String GetSAppointments(String appointmentID) {
+		String output = "";
+
+		try {
+			Connection con = obj.connect();
+			if (con == null) {
+				return "Error while connecting to the database for Get Appointments.";
+			}
+
+			output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Date</th><th>Time</th>"
+					+ "<th>patientID</th><th>doctorID</th><th>paymentID </th><th>Status</th></tr>";
+			String query = "select * from appointment where appointmentID="+appointmentID;
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+		
+
+			while (rs.next()) {
+				String AppID = Integer.toString(rs.getInt("appointmentID"));
+				String date = rs.getString("date");
+				String time = rs.getString("time");
+				String patientID = rs.getString("patientID");
+				String doctorID = rs.getString("doctorID");
+				String paymentID = Integer.toString(rs.getInt("paymentID"));
+				String Status = rs.getString("appointmentStatus");
+
+				output += "<tr><td>" + AppID + "</td>";
+				output += "<td>" + date + "</td>";
+				output += "<td>" + time + "</td>";
+				output += "<td>" + patientID + "</td>";
+				output += "<td>" + doctorID + "</td>";
+				output += "<td>" + paymentID + "</td>";
+				output += "<td>" + Status + "</td>";
+			}
+
+			con.close();
+			output += "</table>";
+			return output;
+		} catch (Exception e) {
+			output = "Error while GetAll Appointments.";
+	
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+	
+	
+	
+	//View appointment details
 	public String GetAllAppoinments() {
 		String output = "";
 
@@ -93,53 +142,8 @@ public class Appointment {
 		return output;
 	}
 
-	// Get Appointment details
-	public String GetAppoinments(String appointmentID) {
-		String output = "";
 
-		try {
-			Connection con = obj.connect();
-			if (con == null) {
-				return "Error while connecting to the database for Get Appointments.";
-			}
-
-			output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Date</th><th>Time</th>"
-					+ "<th>patientID</th><th>doctorID</th><th>paymentID </th><th>Status</th></tr>";
-			String query = "SELECT * from appointment where `appointmentID`=?";
-
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			preparedStmt.setInt(1, Integer.parseInt(appointmentID));
-			ResultSet rs = preparedStmt.executeQuery(query);
-
-			if (rs.next()) {
-				String AppID = Integer.toString(rs.getInt("appointmentID"));
-				String date = rs.getString("date");
-				String time = rs.getString("time");
-				String patientID = rs.getString("patientID");
-				String doctorID = rs.getString("doctorID");
-				String paymentID = Integer.toString(rs.getInt("paymentID"));
-				String Status = rs.getString("appointmentStatus");
-
-				output += "<tr><td>" + AppID + "</td>";
-				output += "<td>" + date + "</td>";
-				output += "<td>" + time + "</td>";
-				output += "<td>" + patientID + "</td>";
-				output += "<td>" + doctorID + "</td>";
-				output += "<td>" + paymentID + "</td>";
-				output += "<td>" + Status + "</td>";
-			}
-
-			con.close();
-			output += "</table>";
-			return output;
-		} catch (Exception e) {
-			output = "Error while GetAll Appointments.";
-			System.err.println(e.getMessage());
-		}
-		return output;
-	}
-
-	// update Appointment
+	// update Appointments
 	public String updateAppoinment(String appointmentID, String date, String time, String patientID, String doctorID,
 			String paymentID, String appointmentStatus) {
 		String output = "";
