@@ -4,7 +4,7 @@ import java.sql.*;
 
 import database.dbconnect;
 
-public class Doctor { // A common method to connect to the DB
+public class Doctor {
 
 	dbconnect obj = new dbconnect();
 
@@ -61,7 +61,7 @@ public class Doctor { // A common method to connect to the DB
 				String Doctor_ID = Integer.toString(rs.getInt("Doctor_ID"));
 				String D_Name = rs.getString("D_Name");
 				String D_Type = rs.getString("D_Type");
-//String itemPrice = Double.toString(rs.getDouble("itemPrice"));
+
 				String D_Contact_Number = Integer.toString(rs.getInt("D_Contact_Number"));
 				String D_Address = rs.getString("D_Address");
 				String D_Email = rs.getString("D_Email");
