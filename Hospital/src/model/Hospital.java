@@ -20,6 +20,7 @@ public class Hospital {
 			if (con == null) {
 				return "Error while connecting to the database for inserting.";
 			}
+			//Insert Hospital
 			// create a prepared statement
 			String query = " insert into hospital(`H_name`,`H_contactNumber`,`H_address`,`H_email`)"
 					+ " values (?, ?, ?, ?)";
@@ -46,6 +47,7 @@ public class Hospital {
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
+			//retriew Hospital details
 			// Prepare the html table to be displayed
 			output = "<table border=\"1\">" + "<th>Hospital Name</th" + "><th>Contatct No</th>" + "<th>Address</th>"
 					+ "<th>E-mail</th>" + "<th>Update</th>" + "<th>Remove</th></tr>";
@@ -93,7 +95,7 @@ public class Hospital {
 			if (con == null) {
 				return "Error while connecting to the database for updating.";
 			}
-			// update
+			// update Hospital
 			// create a prepared statement
 			String query = "UPDATE hospital SET H_name=?,H_contactNumber=?,H_address=?,H_email=? WHERE H_ID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
@@ -121,6 +123,7 @@ public class Hospital {
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
+			//delete  Hospital
 			// create a prepared statement
 			String query = "delete from hospital where H_ID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);

@@ -12,7 +12,7 @@ public class dbconnect {
 	 try
 	 {
 	 Class.forName("com.mysql.cj.jdbc.Driver");
-    //Connection new
+    //Connection new to database 
 	 con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf_project?useTimezone=true&serverTimezone=UTC", "root", "");
 	 }
 	 catch (Exception e)
